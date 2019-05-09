@@ -1,7 +1,6 @@
 === Gravity Forms Block Email Domains ===
 Contributors: roadwarriorwp, alh0319, stevejonesdev
 Donate link: https://roadwarriorcreative.com/donate
-Tags: conference schedule, conference, schedule, sessions, speakers, events, events calendar
 Tags: gravity forms, gravity form, gravity, forms, block email, block domain, blacklist, email blacklist, domain blacklist
 Requires at least: 5.0.0
 Tested up to: 5.2
