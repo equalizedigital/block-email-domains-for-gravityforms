@@ -3,7 +3,7 @@
  * Plugin Name:       Gravity Forms Block Email Domains
  * Plugin URI:        http://roadwarriorcreative.com
  * Description:       Easily set a list of email domains to block on email fields in Gravity Forms.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            Road Warrior Creative
  * Author URI:        https://roadwarriorcreative.com
  * License:           GPL-2.0+
@@ -80,10 +80,10 @@ if ( class_exists( 'GFCommon' ) ) {
 	add_filter( 'gform_field_validation', function ( $result, $value, $form, $field ) {
 		if ( $field->type == 'email' ) {
 			// replace white space
-			$blocked_domains_string = preg_replace('/\s+/', '', $field["block_email_domains"]);
+			$blocked_domains_string = preg_replace('/\s+/', '', strtolower($field["block_email_domains"]));
 			// convert string to array
 			$blocked_domains = explode(",", $blocked_domains_string);
-			$domain = substr(strrchr($value, "@"), 1);
+			$domain = substr(strrchr(strtolower($value), "@"), 1);
 			if($field["block_email_domains"] && in_array($domain, $blocked_domains)){
 				$result['is_valid'] = false;
 				if(!empty($field["block_email_domains_validation"])){

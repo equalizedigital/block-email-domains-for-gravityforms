@@ -3,8 +3,8 @@ Contributors: roadwarriorwp, alh0319, stevejonesdev
 Donate link: https://roadwarriorcreative.com/donate
 Tags: gravity forms, gravity form, gravity, forms, block email, block domain, blacklist, email blacklist, domain blacklist
 Requires at least: 5.0.0
-Tested up to: 5.8
-Stable tag: 1.0.0
+Tested up to: 6.0.1
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,6 +30,9 @@ Gravity Forms Block Email Domains is an add-on plugin for Gravity Forms that all
 4. screenshot-4.png shows the form with the default validation message.
 
 == Changelog ==
+
+= 1.0.1 =
+* Remove case sensitivity on domains
 
 = 1.0.0 =
 * This is version 1 - everything is new and shiny!
