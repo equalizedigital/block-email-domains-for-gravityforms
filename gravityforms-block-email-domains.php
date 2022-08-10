@@ -3,7 +3,7 @@
  * Plugin Name:       Gravity Forms Block Email Domains
  * Plugin URI:        http://roadwarriorcreative.com
  * Description:       Easily set a list of email domains to block on email fields in Gravity Forms.
- * Version:           1.0.1
+ * Version:           1.0.2
  * Author:            Road Warrior Creative
  * Author URI:        https://roadwarriorcreative.com
  * License:           GPL-2.0+
@@ -83,15 +83,27 @@ if ( class_exists( 'GFCommon' ) ) {
 			$blocked_domains_string = preg_replace('/\s+/', '', strtolower($field["block_email_domains"]));
 			// convert string to array
 			$blocked_domains = explode(",", $blocked_domains_string);
-			$domain = substr(strrchr(strtolower($value), "@"), 1);
-			if($field["block_email_domains"] && in_array($domain, $blocked_domains)){
-				$result['is_valid'] = false;
-				if(!empty($field["block_email_domains_validation"])){
-					$error_message = $field["block_email_domains_validation"];
-				}else{
-					$error_message = 'Sorry, '.$domain.' email addresses are not accepted on this field. Please provide another email address and try again.';
+
+			// check if value is an array for when a second email confirmation filed is enabled
+			if(is_array($value)){
+				$values = $value;
+			}else{
+				$values[] = $value;
+			}
+
+			if($values){
+				foreach ($values as $value) {
+					$domain = substr(strrchr(strtolower($value), "@"), 1);
+					if($field["block_email_domains"] && in_array($domain, $blocked_domains)){
+						$result['is_valid'] = false;
+						if(!empty($field["block_email_domains_validation"])){
+							$error_message = $field["block_email_domains_validation"];
+						}else{
+							$error_message = 'Sorry, '.$domain.' email addresses are not accepted on this field. Please provide another email address and try again.';
+						}
+						$result['message']  = empty( $field->errorMessage ) ? __( $error_message, 'gravityforms' ) : $field->errorMessage;
+					}
 				}
-				$result['message']  = empty( $field->errorMessage ) ? __( $error_message, 'gravityforms' ) : $field->errorMessage;
 			}
 		}
 		return $result;
